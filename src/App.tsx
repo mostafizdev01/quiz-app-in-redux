@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Link, Outlet } from "react-router"
+import { ModeToggle } from "./components/ui/mode-toggle"
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -11,7 +12,7 @@ export default function App() {
   }
   return (
     <>
-      <nav className="bg-white shadow-lg border-b cursor-pointer border-gray-100">
+      <nav className=" shadow-lg border-b cursor-pointer border-gray-100 dark:border-gray-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo/Brand - Left */}
@@ -20,7 +21,7 @@ export default function App() {
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-lg">B</span>
                 </div>
-                <span className="ml-2 text-xl font-bold text-gray-900">Brand</span>
+                <span className="dark:text-white ml-2 text-xl font-bold text-gray-900">Brand</span>
               </Link>
             </div>
 
@@ -28,31 +29,31 @@ export default function App() {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 <Link to={'/'}
-                  className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+                  className="text-gray-600 dark:text-white hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 >
                   Home
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
                 </Link>
                 <Link to={'/about'}
-                  className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+                  className="text-gray-600 dark:text-white hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 >
                   About
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
                 </Link>
                 <Link to={'/service'}
-                  className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+                  className="text-gray-600 dark:text-white hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 >
                   Services
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
                 </Link>
                 <Link to={'/portfolio'}
-                  className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+                  className="text-gray-600 dark:text-white hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 >
                   Portfolio
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
                 </Link>
                 <Link to={'/contact'}
-                  className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+                  className="text-gray-600 dark:text-white hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 >
                   Contact
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
@@ -62,9 +63,7 @@ export default function App() {
 
             {/* CTA Button - Right (Desktop) */}
             <div className="hidden md:block">
-              <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                Get Started
-              </Button>
+              <ModeToggle />
             </div>
 
             {/* Mobile menu button */}
