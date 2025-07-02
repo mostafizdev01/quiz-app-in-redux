@@ -3,7 +3,7 @@ import type { ITask } from './../../../types';
 import { createSlice } from "@reduxjs/toolkit";
 
 
-interface InitialState{
+interface InitialState {
     task: ITask[];
     filter: "all" | "high" | "medium" | "low";
 }
@@ -19,12 +19,28 @@ const initialState: InitialState = {
             priority: "high",
         },
         {
+            id: "sgfdghjkfdghj",
+            title: "Initalalize Backend",
+            description: "Createing Backend useing express Js",
+            dueDate: "2025-11",
+            isCompleted: false,
+            priority: "low",
+        },
+        {
+            id: "asdfasdfhjkl",
+            title: "Initalalize FullStack",
+            description: "Learning FullStack web developments",
+            dueDate: "2025-11",
+            isCompleted: false,
+            priority: "high",
+        },
+        {
             id: "asdfasdfsqwer",
             title: "Github Repositorys",
             description: "Creating github repository and git marge",
             dueDate: "2025-11",
             isCompleted: false,
-            priority: "high",
+            priority: "medium",
         }
     ],
     filter: "all",
