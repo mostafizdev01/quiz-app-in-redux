@@ -3,7 +3,7 @@ import taskReducer from '../features/task/taskSlice'
 
 export const store = configureStore({
     reducer: {
-      tasks: taskReducer,  // connect to slice
+      task: taskReducer,  // connect to slice
     }
 })
 

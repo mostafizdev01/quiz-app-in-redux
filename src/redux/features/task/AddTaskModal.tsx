@@ -34,13 +34,19 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
+import { useAppDispatch } from "@/redux/middlewares/hook"
+import { addTask } from "./taskSlice"
 
 export default function AddTaskModal() {
   const form = useForm()
 
+  const disPatch = useAppDispatch();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log({ ...data })
+
+    disPatch(addTask(data))
   }
 
   return (
