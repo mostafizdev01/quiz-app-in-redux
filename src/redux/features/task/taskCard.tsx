@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
+import { useAppDispatch } from "@/redux/middlewares/hook";
 import type { ITask } from "@/types";
 import { Delete } from "lucide-react";
+import { deleteTask, toggleCompleteState } from "./taskSlice";
 
 interface IProps {
     task: ITask
@@ -8,7 +10,9 @@ interface IProps {
 
 export default function TaskCard({ task }: IProps) {
 
-    const { title, description, priority } = task;
+    const disPatch = useAppDispatch()
+
+    const {id, title, description, priority } = task;
 
 
     return (
@@ -29,13 +33,13 @@ export default function TaskCard({ task }: IProps) {
 
                 {/* Right Side */}
                 <div className="flex items-center space-x-2">
-                    <input
+                    <input onClick={() => disPatch(toggleCompleteState(id))}
                         type="checkbox"
                         className=" cursor-pointer appearance-none w-4 h-4 bg-transparent border border-gray-400 rounded-sm checked:bg-blue-500 checked:border-transparent focus:outline-none"
                     />
 
                     <button className="text-red-500 hover:text-red-700 cursor-pointer">
-                        <Delete />
+                        <Delete onClick={() => disPatch(deleteTask(id))} />
                     </button>
                 </div>
             </div>

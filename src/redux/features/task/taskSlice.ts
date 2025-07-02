@@ -10,14 +10,23 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-    tasks: [],
+    tasks: [
+        {
+            id: "y5e8RmNErHRyj6cdkRpyg",
+            isCompleted: false,
+            title: "Pariatur Et consequ",
+            description: "Dolores et sunt in v",
+            dueDate: "2025-07-29T18:00:00.000Z",
+            priority: "high"
+        }
+    ],
     filter: "all",
 };
 
-type DraftTask = Pick<ITask, "title" | "description" | "dueDate" | "priority" >;
+type DraftTask = Pick<ITask, "title" | "description" | "dueDate" | "priority">;
 
-const crateTask = (taskData : DraftTask) : ITask => {
-    return {id: nanoid(), isCompleted: false, ...taskData}
+const crateTask = (taskData: DraftTask): ITask => {
+    return { id: nanoid(), isCompleted: false, ...taskData }
 }
 
 const teskSlice = createSlice({
@@ -36,6 +45,12 @@ const teskSlice = createSlice({
             //     isCompleted: false
             // }
             state.tasks.push(taskData)
+        },
+        toggleCompleteState: (state, action: PayloadAction<string>) => {
+            state.tasks.forEach((task) => task.id === action.payload ? (task.isCompleted = !task.isCompleted) : task)
+        },
+        deleteTask: (state, action: PayloadAction<string>) => {
+            state.tasks = state.tasks.filter(task => task.id !== action.payload)
         }
     }
 })
@@ -48,6 +63,6 @@ export const selectFilter = (state: RootState) => {
     return state.task.filter
 }
 
-export const { addTask } = teskSlice.actions
+export const { addTask, toggleCompleteState, deleteTask } = teskSlice.actions
 
 export default teskSlice.reducer;
