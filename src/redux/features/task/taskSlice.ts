@@ -51,18 +51,35 @@ const teskSlice = createSlice({
         },
         deleteTask: (state, action: PayloadAction<string>) => {
             state.tasks = state.tasks.filter(task => task.id !== action.payload)
+        },
+        filterTask: (state, action: PayloadAction<"all" | "high" | "medium" | "low">) => {
+            state.filter = action.payload;
         }
     }
 })
 
 export const selectTask = (state: RootState) => { // set types and find task data in store
-    return state.task.tasks
+    const filter = state.task.filter;
+    const allTask = state.task.tasks;
+    if (filter === "low") {
+        return allTask.filter(task => task.priority === "low")
+    }
+    else if (filter === "medium") {
+        return allTask.filter(task => task.priority === "medium")
+    }
+    else if (filter === "high") {
+        return allTask.filter(task => task.priority === "high")
+    }
+    else {
+        return allTask
+    }
+
 }
 
 export const selectFilter = (state: RootState) => {
     return state.task.filter
 }
 
-export const { addTask, toggleCompleteState, deleteTask } = teskSlice.actions
+export const { addTask, toggleCompleteState, deleteTask, filterTask } = teskSlice.actions
 
 export default teskSlice.reducer;
