@@ -36,7 +36,7 @@ const teskSlice = createSlice({
     reducers: {}
 })
 
-export const selectTask = (state: RootState) => {
+export const selectTask = (state: RootState) => { // set types and find task data in store
     return state.tasks.task
 }
 
