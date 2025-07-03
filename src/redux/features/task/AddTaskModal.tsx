@@ -36,10 +36,12 @@ import {
 } from "@/components/ui/form"
 import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook"
 import { addTask } from "./taskSlice"
+import { useState } from "react"
 
 
 export default function AddTaskModal() {
   const form = useForm()
+  const [open, setOpen] = useState(false)
 
   const userArr = useAppSelector((state) => state.user.users)
   console.log(userArr)
@@ -50,10 +52,12 @@ export default function AddTaskModal() {
   const onSubmit = (data: any) => {
     console.log({ ...data })
     disPatch(addTask(data))
+    setOpen(false)
+    form.reset()
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="destructive">Add Task</Button>
       </DialogTrigger>

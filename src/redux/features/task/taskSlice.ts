@@ -18,7 +18,7 @@ const initialState: InitialState = {
             description: "Dolores et sunt in v",
             dueDate: "2025-07-29T18:00:00.000Z",
             priority: "high",
-            userId: "hsdfoihsdf345"
+            userId: null
         }
     ],
     filter: "all",
@@ -27,7 +27,7 @@ const initialState: InitialState = {
 type DraftTask = Pick<ITask, "title" | "description" | "dueDate" | "priority" | "userId">;
 
 const crateTask = (taskData: DraftTask): ITask => {
-    return { id: nanoid(), isCompleted: false, ...taskData }
+    return { ...taskData, id: nanoid(), isCompleted: false, userId: taskData.userId ? taskData.userId : null }
 }
 
 const teskSlice = createSlice({
@@ -56,7 +56,12 @@ const teskSlice = createSlice({
         filterTask: (state, action: PayloadAction<"all" | "high" | "medium" | "low">) => {
             state.filter = action.payload;
         }
-    }
+    }, 
+    // extraReducers: (builder)=> { /// when we are delete user. then call extraReducer function
+    //     builder.addCase(removeUser, (state, action)=> {  // removeUser is userSlice action name.
+    //         state.tasks.forEach(task) => task.userId === action.payload ? (task.userId = null) : task
+    //     })
+    // }
 })
 
 export const selectTask = (state: RootState) => { // set types and find task data in store
