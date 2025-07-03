@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "./redux/middlewares/hook"
 import { filterTask, selectTask } from "./redux/features/task/taskSlice";
 import TaskCard from "./redux/features/task/taskCard";
 import AddTaskModal from "./redux/features/task/AddTaskModal";
+import AddUserModal from "./redux/features/user/AddUserModal.js"
 import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
               </TabsList>
             </Tabs>
             <AddTaskModal />
+            <AddUserModal />
           </div>
         </div>
         {
