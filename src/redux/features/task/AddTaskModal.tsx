@@ -34,18 +34,21 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
-import { useAppDispatch } from "@/redux/middlewares/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook"
 import { addTask } from "./taskSlice"
+
 
 export default function AddTaskModal() {
   const form = useForm()
+
+  const userArr = useAppSelector((state) => state.user.users)
+  console.log(userArr)
 
   const disPatch = useAppDispatch();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log({ ...data })
-
     disPatch(addTask(data))
   }
 
@@ -85,6 +88,23 @@ export default function AddTaskModal() {
                   <SelectItem value="low">Low</SelectItem>
                   <SelectItem value="medium">Medium</SelectItem>
                   <SelectItem value="high">High</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* user Select */}
+
+            <div className="grid gap-2">
+              <Label>User</Label>
+              <Select onValueChange={(value) => form.setValue("userId", value)}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select user" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  {
+                    userArr.map((user) => <SelectItem key={user.id} value={user.id}>{user.name}</SelectItem>)
+                  }
                 </SelectContent>
               </Select>
             </div>

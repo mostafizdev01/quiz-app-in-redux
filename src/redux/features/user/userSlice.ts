@@ -1,7 +1,13 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import type { RootState } from "@/redux/middlewares/store";
+import type { IUser } from "@/types";
+import { createSlice, nanoid, type PayloadAction } from "@reduxjs/toolkit";
 
 
-const initialState = {
+interface InitialState {
+    users: IUser[];
+}
+
+const initialState: InitialState = {
     users: [
         {
             name: "mostafiz",
@@ -14,7 +20,7 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-       addUser: (state, action) => {
+       addUser: (state, action: PayloadAction<IUser>) => {
         const UserData = {
             ...action.payload,
             id: nanoid()
@@ -23,6 +29,10 @@ const userSlice = createSlice({
        }
     }
 })
+
+export const selectUser = (state: RootState) => {
+    return state.user.users
+}
 
 export const { addUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -17,13 +17,14 @@ const initialState: InitialState = {
             title: "Pariatur Et consequ",
             description: "Dolores et sunt in v",
             dueDate: "2025-07-29T18:00:00.000Z",
-            priority: "high"
+            priority: "high",
+            userId: "hsdfoihsdf345"
         }
     ],
     filter: "all",
 };
 
-type DraftTask = Pick<ITask, "title" | "description" | "dueDate" | "priority">;
+type DraftTask = Pick<ITask, "title" | "description" | "dueDate" | "priority" | "userId">;
 
 const crateTask = (taskData: DraftTask): ITask => {
     return { id: nanoid(), isCompleted: false, ...taskData }

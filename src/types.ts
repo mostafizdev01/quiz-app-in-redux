@@ -4,5 +4,11 @@ export interface ITask {
     description: string,
     dueDate: string,
     isCompleted: boolean,
-    priority: "all" | "high" | "medium" | "low";
+    priority: "all" | "high" | "medium" | "low",
+    userId: string | null;
+}
+
+export interface IUser { 
+    id: string,
+    name: string
 }
