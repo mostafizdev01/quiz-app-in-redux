@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useAppDispatch } from "@/redux/middlewares/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook";
 import type { ITask } from "@/types";
 import { Delete } from "lucide-react";
 import { deleteTask, toggleCompleteState } from "./taskSlice";
@@ -10,10 +10,13 @@ interface IProps {
 
 export default function TaskCard({ task }: IProps) {
 
+    const {id, userId, title, description, priority } = task;
     const disPatch = useAppDispatch()
-
-    const {id, title, description, priority } = task;
-
+    const users = useAppSelector((state) => state.user.users)
+   
+    const assignUser = users.find((user)=> user.id === userId);
+    console.log(assignUser);
+    
 
     return (
         <>
@@ -27,6 +30,7 @@ export default function TaskCard({ task }: IProps) {
                     })}></div>
                     <div>
                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{title}</h3>
+                        <p className="text-sm  text-gray-800 dark:text-white"> Name:- {assignUser?.name? assignUser.name : "No One"}</p>
                         <p className="text-sm  text-gray-800 dark:text-white">{description}</p>
                     </div>
                 </div>
