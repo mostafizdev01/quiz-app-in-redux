@@ -34,26 +34,39 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
-import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook"
-import { addTask } from "./taskSlice"
+// import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook"
+// import { addTask } from "./taskSlice"
 import { useState } from "react"
+import { useCreateTaskMutation } from "@/redux/api/baseApi"
 
 
 export default function AddTaskModal() {
   const form = useForm()
   const [open, setOpen] = useState(false)
 
-  const userArr = useAppSelector((state) => state.user.users)
-  console.log(userArr)
+  const [ createTask, { data, isError, isLoading} ] = useCreateTaskMutation()
 
-  const disPatch = useAppDispatch();
 
+  // const userArr = useAppSelector((state) => state.user.users)
+  // console.log(userArr)
+  // const disPatch = useAppDispatch();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log({ ...data })
-    disPatch(addTask(data))
+    // disPatch(addTask(data))
+    const taskData = {
+      ...data,
+      isCompleted: false
+    };
+    const res = await createTask(taskData).unwrap() // call createTask function in baseApi
+    console.log("insite submit function", res);
+    
     setOpen(false)
     form.reset()
+  }
+
+  if(isLoading){
+    return <div>Loading...</div>
   }
 
   return (
@@ -106,9 +119,9 @@ export default function AddTaskModal() {
                 </SelectTrigger>
 
                 <SelectContent>
-                  {
+                  {/* {
                     userArr.map((user) => <SelectItem key={user.id} value={user.id}>{user.name}</SelectItem>)
-                  }
+                  } */}
                 </SelectContent>
               </Select>
             </div>

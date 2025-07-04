@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook";
+// import { useAppDispatch, useAppSelector } from "@/redux/middlewares/hook";
 import type { ITask } from "@/types";
 import { Delete } from "lucide-react";
 import { deleteTask, toggleCompleteState } from "./taskSlice";
@@ -10,12 +10,12 @@ interface IProps {
 
 export default function TaskCard({ task }: IProps) {
 
-    const {id, userId, title, description, priority } = task;
-    const disPatch = useAppDispatch()
-    const users = useAppSelector((state) => state.user.users)
+    const {id, title, description, priority } = task;
+    // const disPatch = useAppDispatch()
+    // const users = useAppSelector((state) => state.user.users)
    
-    const assignUser = users.find((user)=> user.id === userId);
-    console.log(assignUser);
+    // const assignUser = users.find((user)=> user.id === userId);
+    // console.log(assignUser);
     
 
     return (
@@ -30,14 +30,14 @@ export default function TaskCard({ task }: IProps) {
                     })}></div>
                     <div>
                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{title}</h3>
-                        <p className="text-sm  text-gray-800 dark:text-white"> Name:- {assignUser?.name? assignUser.name : "No One"}</p>
+                        <p className="text-sm  text-gray-800 dark:text-white"> Name:- No One</p>
                         <p className="text-sm  text-gray-800 dark:text-white">{description}</p>
                     </div>
                 </div>
 
                 {/* Right Side */}
                 <div className="flex items-center space-x-2">
-                    <input onClick={() => disPatch(toggleCompleteState(id))}
+                    <input 
                         type="checkbox"
                         className=" cursor-pointer appearance-none w-4 h-4 bg-transparent border border-gray-400 rounded-sm checked:bg-blue-500 checked:border-transparent focus:outline-none"
                     />
