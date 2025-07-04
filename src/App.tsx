@@ -6,11 +6,15 @@ import TaskCard from "./redux/features/task/taskCard";
 import AddTaskModal from "./redux/features/task/AddTaskModal";
 import AddUserModal from "./redux/features/user/AddUserModal.js"
 import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { useGetTasksQuery } from "./redux/api/baseApi.js";
 
 export default function App() {
   const tasks = useAppSelector(selectTask)
   const disPatch = useAppDispatch()
-  console.log(tasks);
+  const {data, isError, isLoading} = useGetTasksQuery(undefined);
+
+  console.log(data, isError, isLoading);
+  
 
   return (
     <>
@@ -32,7 +36,7 @@ export default function App() {
           </div>
         </div>
         {
-          tasks.map((task) => <TaskCard key={task.id} task={task} />)
+          tasks.map((task: any) => <TaskCard key={task.id} task={task} />)
         }
 
       </div>
