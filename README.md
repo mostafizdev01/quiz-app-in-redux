@@ -2,4 +2,4 @@
 # Used Tecnology --
 1. React
 2. Javascript
-3. 
+3. Typescript
