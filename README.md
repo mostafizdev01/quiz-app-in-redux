@@ -1,2 +1,1 @@
-# React + TypeScript + Vite
-
+# Quiz app in redux
